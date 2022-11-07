@@ -1,1 +1,36 @@
+name: Terraform
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  terraform:
+    name:    Terraform
+    runs-on: ubuntu-latest
+    steps:
+     - name: checkout
+       uses: actions/checkout@master
+     - name: Setup Terraform
+       uses: hashicorp/setup-terraform@v1
+       with:
+        # terraform_version: 0.13.0
+        cli_config_credetials_token: ${{ secrets.TF_API_Token }}
+     - name: terraform-init
+       id:   init
+       run:  terraform init
+     - name: terraform-validate
+       id:   validate
+       run:  terraform validate
+     - name: terraform-plan
+       id:   plan
+       if:   github.event_name == pull_request 
+       run:  terraform plan
+       env:
+        Resource Group Name: NewRG.{count}
+        Resource Group Location: West US
+     - name: terraform plan status 
+       if:   steps.plan.outcome == 'failure'
+       run:  exit 1
+
 
