@@ -9,7 +9,7 @@ resource "azurerm_resource_group" "rg_name" {
 
 resource "azurerm_virtual_network" "VNet_name" {
  name                = var.virtual_network_name
- resource_group_name = var.rg_name.name
- location            = var.rg_name.name
+ resource_group_name = var.azurerm_resource_group.rg_name.name
+ location            = var.azurerm_resource_group.rg_name.location 
  address_space       = ["10.0.0.0/16"]
 }
