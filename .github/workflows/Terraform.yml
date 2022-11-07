@@ -26,8 +26,8 @@ jobs:
        id:   plan
        run:  terraform plan
        env:
-        Resource Group Name: NewRG.{count}
-        Resource Group Location: West US
+        resource_group_name: NewRG.{count}
+        resource_group_location: West US
      - name: terraform plan status 
        if:   steps.plan.outcome == 'failure'
        run:  exit 1
