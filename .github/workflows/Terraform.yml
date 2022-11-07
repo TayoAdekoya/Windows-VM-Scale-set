@@ -24,7 +24,7 @@ jobs:
        run:  terraform validate
      - name: terraform-plan
        id:   plan
-       if:   github.event_name == pull_request 
+       if:   github.event_name == 'pull_request' 
        run:  terraform plan
        env:
         Resource Group Name: NewRG.{count}
