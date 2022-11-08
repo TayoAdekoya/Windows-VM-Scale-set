@@ -24,7 +24,8 @@ jobs:
        run:  terraform validate
      - name: terraform-plan
        id:   plan
-       run:  terraform plan
+       run:  terraform plan -input=false
+       continue-on-error: true
        env:
         resource_group_name: NewRG{count}
         resource_group_location: West US
