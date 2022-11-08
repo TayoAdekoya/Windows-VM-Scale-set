@@ -49,7 +49,7 @@ resource "azurerm_windows_virtual_machine_scale_set" "VMSS_name" {
     ip_configuration {
       name = var.subnet_name
       primary = true
-      subnet_id = var.subnet_name.id
+      subnet_id = var.subnet_name_id
     }
   }
 }
